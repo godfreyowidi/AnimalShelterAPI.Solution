@@ -25,16 +25,19 @@ namespace CretaceousPark.Controllers
       return await _db.Animals.ToListAsync();
     }
 
-    // POST api/animals
-    [HttpPost]
-    public async Task<ActionResult<Animal>> Post(Animal animal)
+    // GET: api/Animals/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Animal>> GetAnimal(int id)
     {
-      _db.Animals.Add(animal);
-      await _db.SaveChangesAsync();
+        var animal = await _db.Animals.FindAsync(id);
 
-      return CreatedAtAction("Post", new { id = animal.AnimalId }, animal);
-    }
+        if (animal == null)
+        {
+            return NotFound();
+        }
 
+        return animal;
+    }    
      // PUT: api/Animals/5
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, Animal animal)
@@ -64,6 +67,17 @@ namespace CretaceousPark.Controllers
 
       return NoContent();
     }
+
+    // POST: api/Animals
+    [HttpPost]
+    public async Task<ActionResult<Animal>> Post(Animal animal)
+    {
+      _db.Animals.Add(animal);
+      await _db.SaveChangesAsync();
+
+      return CreatedAtAction(nameof(GetAnimal), new { id = animal.AnimalId }, animal);
+    }
+
     private bool AnimalExists(int id)
     {
       return _db.Animals.Any(e => e.AnimalId == id);
