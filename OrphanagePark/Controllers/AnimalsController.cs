@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OrphanagePark.Models;
 
 namespace CretaceousPark.Controllers
@@ -12,6 +15,23 @@ namespace CretaceousPark.Controllers
     public AnimalsController(OrphanageParkContext db)
     {
       _db = db;
+    }
+    
+    // GET api/animals
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Animal>>> Get()
+    {
+      return await _db.Animals.ToListAsync();
+    }
+
+    // POST api/animals
+    [HttpPost]
+    public async Task<ActionResult<Animal>> Post(Animal animal)
+    {
+      _db.Animals.Add(animal);
+      await _db.SaveChangesAsync();
+
+      return CreatedAtAction("Post", new { id = animal.AnimalId }, animal);
     }
   }
 }
