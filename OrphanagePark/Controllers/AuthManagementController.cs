@@ -74,6 +74,13 @@ namespace OrphanagePark.Controllers
       });
     }
 
+    [HttpPost]
+    [Route("Login")]
+
+    public async Task<IActionResult> Login([FromBody] UserLoginRequest user)
+    {
+      
+    }
     //Generate token
     private string GenerateJwtToken(IdentityUser user)
     {
