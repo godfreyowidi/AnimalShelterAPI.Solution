@@ -20,7 +20,7 @@
 🌐 About the Project
 
 📖 Description
-
+This API tracks rescued cats and dogs from around the world and provide the user with information on them. To access this information, user is required to register using their email address and password.
 
 🦠 Known Bugs
 * No known bug.
@@ -29,8 +29,8 @@
 * Visual Studio Code
 * C#
 * ASP.NET Core MVC
-* MySQL 8.0.20
-* Entity Framework Core 2.2.6
+* MySQL 8.0.25
+* Entity Framework Core 6: v6.4.4
 * Jwt Authentication
 * Postman
 
@@ -39,25 +39,25 @@
 📋 Prerequisites
 #### Install .NET Core
 * On macOS Mojave or later
-  - Click here to download the .NET Core SDK from Microsoft Corp for macOS.
+  - Click [here](https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.412-macos-x64-installer) to download the .NET Core SDK from Microsoft Corp for macOS.
 * On Windows 10 x64 or later
-  - Click here to download the 64-bit .NET Core SDK from Microsoft Corp for Windows.
+  - Click [here](https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.412-windows-x64-installer) to download the 64-bit .NET Core SDK from Microsoft Corp for Windows.
 
 #### Install dotnet script
-Enter the command dotnet tool install -g dotnet-script in Terminal for macOS or PowerShell for Windows.
+Enter the command ```dotnet tool install -g dotnet-script``` in Terminal for macOS or PowerShell for Windows.
 
 #### Install MySQL Workbench
-Download and install the appropriate version of MySQL Workbench.
+Download and install the appropriate version of [MySQL Workbench](https://dev.mysql.com/downloads/workbench/).
 
 #### Install Postman
-(Optional) Download and install Postman.
+(Optional) Download and install [Postman](https://www.postman.com/downloads/).
 
 #### Code Editor
-To view or edit the code, you will need an code editor or text editor. The popular open-source choices for an code editor are Atom and VisualStudio Code.
+To view or edit the code, you will need an code editor or text editor. The popular open-source choices for an code editor are Atom and Visual Studio Code.
 
 1. Code Editor Download:
-  * Option 1: Atom
-  * Option 2: VisualStudio Code
+  * Option 1: [Atom](https://www.filehorse.com/download-atom-64/)
+  * Option 2: [Visual Studio Code](https://code.visualstudio.com/download)
 2. Click the download most applicable to your OS and system.
 3. Wait for download to complete, then install -- Windows will run the setup exe and macOS will drag and drop into applications.
 4. Optionally, create a GitHub Account

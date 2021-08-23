@@ -12,11 +12,14 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace OrphanagePark.Controllers
 {
   //api/authManagement
   [Route("api/[controller]")]
+  [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
   public class AuthManagementController : ControllerBase
   {
     private readonly UserManager<IdentityUser> _userManager;
@@ -76,10 +79,45 @@ namespace OrphanagePark.Controllers
 
     [HttpPost]
     [Route("Login")]
-
     public async Task<IActionResult> Login([FromBody] UserLoginRequest user)
     {
-      
+      if (ModelState.IsValid)
+      {
+        var existingUser = await _userManager.FindByEmailAsync(user.Email);
+
+        if (existingUser == null) {
+              return BadRequest(new RegistrationResponse(){
+                Errors = new List<string>() {
+                  "Invalid Login Request"
+                },
+                Success = false
+            });
+        }
+
+        var isCorrect = await _userManager.CheckPasswordAsync(existingUser, user.Password);
+
+        if (!isCorrect) {
+              return BadRequest(new RegistrationResponse(){
+                Errors = new List<string>() {
+                  "Invalid payload"
+                },
+                Success = false
+              });
+        }
+        var jwtToken = GenerateJwtToken(existingUser);
+
+        return Ok(new RegistrationResponse() {
+            Success = true,
+            Token = jwtToken
+        });
+      }
+
+      return BadRequest(new RegistrationResponse(){
+              Errors = new List<string>() {
+                "Invalid payload"
+              },
+              Success = false
+      });
     }
     //Generate token
     private string GenerateJwtToken(IdentityUser user)
